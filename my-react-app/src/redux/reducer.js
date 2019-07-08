@@ -1,6 +1,5 @@
 import Promise from 'es6-promise';
-import { functionTypeAnnotation } from '@babel/types';
-import { statement } from '@babel/template';
+
 
 
 const LOGIN_PENDING = 'LOGIN_PENDING';
@@ -46,7 +45,7 @@ export function login(email, password) {
     };
 }
 
-export default function reducer(stae = {
+export default function reducer(state = {
     isLoginPending: false,
     isLoginSuccess: false,
     LoginError: null
