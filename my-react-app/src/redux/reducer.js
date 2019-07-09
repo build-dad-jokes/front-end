@@ -34,14 +34,14 @@ export function login(email, password) {
         dispatch(setLoginError(null));
 
         sendLoginRequest(email, password)
-        .then(success => {
-            dispatch(setLoginPending(false));
-            dispatch(setLoginSuccess(true));
-        })
-        .catch(err => {
-            dispatch(setLoginPending(false));
-            dispatch(setLoginError(err));
-        });
+            .then(success => {
+                dispatch(setLoginPending(false));
+                dispatch(setLoginSuccess(true));
+            })
+            .catch(err => {
+                dispatch(setLoginPending(false));
+                dispatch(setLoginError(err));
+            });
     };
 }
 
@@ -60,29 +60,32 @@ export default function reducer(state = {
 
         case LOGIN_PENDING:
             return {
-               ...state,
-               isLoginPending: action.isLoginPending
+                ...state,
+                isLoginPending: action.isLoginPending
             };
 
-            case LOGIN_ERROR:
-                return {
-                    ...state,
-                    loginError: action.loginError
-                };
+        case LOGIN_ERROR:
+            return {
+                ...state,
+                loginError: action.loginError
+            };
 
-            default:
-                return state;
+        default:
+            return state;
     }
 }
 
 function sendLoginRequest(email, password) {
     return new Promise((resolve, reject) => {
+        setTimeout(() => {
         if (email === 'admin@example.com' && password === 'admin') {
             return resolve(true);
         } else {
             return reject(new Error('Invalid email or password'));
         }
-    });
+    }, 1000);
+
+});
 }
 
 
