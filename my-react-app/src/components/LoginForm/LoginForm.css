@@ -3,7 +3,7 @@
 form {
     border: 5px solid #476A6F;
     border-radius: 12px;
-    box-shadow: 10px 10px 5px  #7EB09B;
+    box-shadow: 10px 10px 5px  rgba(126, 176, 155, .25);
 }
 
 body {
@@ -38,7 +38,7 @@ input {
     color:  #476A6F;
     align-items: center;
     border-radius: 12px;
-    box-shadow: 10px 10px 5px #7EB09B;
+    box-shadow: 10px 10px 5px rgba(126, 176, 155, .25); /* 126, 176, 155 */
 }
 
 input:hover {

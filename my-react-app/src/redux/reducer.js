@@ -1,10 +1,10 @@
 import Promise from 'es6-promise';
-
-
+import axios from 'axios';
 
 const LOGIN_PENDING = 'LOGIN_PENDING';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_ERROR = 'LOGIN_ERROR';
+const baseUrl = 'https://bw-dad-jokes.herokuapp.com/api';
 
 function setLoginPending(isLoginPending) {
     return {
@@ -76,16 +76,8 @@ export default function reducer(state = {
 }
 
 function sendLoginRequest(email, password) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-        if (email === 'admin@example.com' && password === 'admin') {
-            return resolve(true);
-        } else {
-            return reject(new Error('Invalid email or password'));
-        }
-    }, 1000);
-
-});
+    const payload = {username: email, password};
+    return axios.post(`${baseUrl}/auth/login`, payload);
 }
 
 
