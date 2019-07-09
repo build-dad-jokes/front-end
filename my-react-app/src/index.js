@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider} from 'react-redux';
 import store from './redux/store';
-import LoginForm from './components/LoginForm/LoginForm'
-
+import App from "./App.js";
 
 
 ReactDOM.render(
 <Provider store={store}>
-    <LoginForm />
+    <App />
 </Provider>,
+
 document.getElementById('root')
 );
 
