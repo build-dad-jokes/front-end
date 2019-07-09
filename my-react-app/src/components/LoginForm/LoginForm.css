@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
 form {
     border: 5px solid #476A6F;
     border-radius: 12px;
-    box-shadow: 10px 10px 5px  rgba(126, 176, 155, .25);
+    box-shadow: 10px 10px 5px rgba(126, 176, 155, .25);
 }
 
 body {
@@ -35,18 +34,16 @@ input {
     margin-left: 5px;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    color:  #476A6F;
+    color: #476A6F;
     align-items: center;
     border-radius: 12px;
-    box-shadow: 10px 10px 5px rgba(126, 176, 155, .25); /* 126, 176, 155 */
+    box-shadow: 10px 10px 5px rgba(126, 176, 155, .25);
+    /* 126, 176, 155 */
 }
 
 input:hover {
-    background-color:#519E8A;
-  
+    background-color: #519E8A;
 }
-
-
 
 div {
     font-family: 'Open Sans', sans-serif;
@@ -58,7 +55,20 @@ div {
     align-items: center;
     cursor: pointer;
     border-radius: 12px;
-    
-   
 }
 
+.btn {
+    border: #476A6F;
+    background-color: rgb(118, 144, 148);
+    font-family: 'Open Sans', sans-serif;
+    font: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+}
