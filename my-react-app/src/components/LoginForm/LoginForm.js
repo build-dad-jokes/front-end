@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../redux/reducer';
 
+import './LoginForm.css';
+
 class LoginForm extends Component {
 
     constructor(props) {
@@ -21,7 +23,11 @@ class LoginForm extends Component {
                     <label>Password:</label>
                     <input type="password" name="password" onChange={e => this.setState({password: e.target.value})} />
 
+                    <div className="login-button">
+
                     <input type="submit" value="Login" />
+
+                    </div>
 
                     { isLoginPending && <div>Please wait...</div> }
                     { isLoginSuccess && <div>Welcome Back!</div> }
