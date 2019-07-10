@@ -45,6 +45,24 @@ export function login(email, password) {
     };
 }
 
+export function register(email, password) {
+    return dispatch => {
+        dispatch(setLoginPending(false));
+        dispatch(setLoginSuccess(false));
+        dispatch(setLoginError(null));
+
+        sendRegisterationRequest(email, password)
+            .then(success => {
+                dispatch(setLoginPending(false));
+                dispatch(setLoginSuccess(true));
+            })
+            .catch(err => {
+                dispatch(setLoginPending(false));
+                dispatch(setLoginError(err));
+            });
+    };
+}
+
 export default function reducer(state = {
     isLoginPending: false,
     isLoginSuccess: false,
@@ -80,4 +98,7 @@ function sendLoginRequest(email, password) {
     return axios.post(`${baseUrl}/auth/login`, payload);
 }
 
-
+function sendRegisterationRequest(email, password) {
+    const payload = {username: email, password};
+    return axios.post(`${baseUrl}/auth/register`, payload);
+}

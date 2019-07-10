@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { register } from '../../redux/reducer';
 
 
 class SignUpForm extends React.Component {
@@ -23,7 +24,8 @@ class SignUpForm extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        const {username, password} = this.state;
+        this.props.register(username, password);
     }
 
     render() {
@@ -47,7 +49,7 @@ class SignUpForm extends React.Component {
                     <input
                         value={this.state.email}
                         onChange={this.onChange}
-                        type="text"
+                        type="email"
                         name="email"
                         className="form-control"
                     />
@@ -58,7 +60,7 @@ class SignUpForm extends React.Component {
                     <input
                         value={this.state.password}
                         onChange={this.onChange}
-                        type="text"
+                        type="password"
                         name="password"
                         className="form-control"
                     />
@@ -69,8 +71,8 @@ class SignUpForm extends React.Component {
                     <input
                         value={this.state.passwordConfirmation}
                         onChange={this.onChange}
-                        type="text"
-                        name="passwordconfirmation"
+                        type="password"
+                        name="passwordConfirmation"
                         className="form-control"
                     />
                 </div>
@@ -81,12 +83,22 @@ class SignUpForm extends React.Component {
                         </button>
                 </div>
             </form>
-
-
-
-
         );
     }
 }
 
-export default SignUpForm;
+const mapStateToProps = (state) => {
+    return {
+        isLoginPending: state.isLoginPending,
+        isLoginSuccess: state.isLoginSuccess,
+        loginError: state.loginError
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        register: (email, password) => dispatch(register(email, password))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
