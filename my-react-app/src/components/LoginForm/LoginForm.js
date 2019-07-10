@@ -4,6 +4,7 @@ import { login } from '../../redux/reducer';
 
 import './LoginForm.css';
 
+
 class LoginForm extends Component {
 
     constructor(props) {
@@ -17,16 +18,20 @@ class LoginForm extends Component {
         return (
             <div className="login-form-wrapper" onSubmit={this.onSubmit}>
                 <form name="loginForm">
-                    <label>Username:</label>
-                    <input name="email" onChange={e => this.setState({ email: e.target.value })} />
-                    <br />
-                    <label>Password:</label>
-                    <input type="password" name="password" onChange={e => this.setState({ password: e.target.value })} />
+                    <div className="form-group">
+                        <label>Username</label>
+                        <input name="email" onChange={e => this.setState({ email: e.target.value })} />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" onChange={e => this.setState({ password: e.target.value })} />
+                    </div>
 
                     <div className="login-button">
-
-                        <input type="submit" value="Login" />
-
+                        <button type="submit" className="btn" onClick={this.onSubmit}>
+                            Login
+                        </button>
                     </div>
 
                     {isLoginPending && <div>Please wait...</div>}
