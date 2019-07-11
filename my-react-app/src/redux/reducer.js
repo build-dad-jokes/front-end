@@ -10,18 +10,20 @@ const SIGNUP_PENDING = 'SIGNUP_PENDING';
 const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
+const PRIVATE_JOKES_SUCCESS = 'PRIVATE_JOKES_SUCCESS';
+
 export const baseUrl = 'https://dad-jokes-bw.herokuapp.com/api';
 
 
 
 export function signUp(body) {
-  return function(dispatch) {
-    dispatch({ type: SIGNUP_PENDING })
-    axios.post(`${baseUrl}/auth/register`, body)
-        .then(resp => dispatch({ type: SIGNUP_SUCCESS, payload:resp.body }))
-        .catch(err => dispatch({type: SIGNUP_ERROR, err}));
+    return function (dispatch) {
+        dispatch({ type: SIGNUP_PENDING })
+        axios.post(`${baseUrl}/auth/register`, body)
+            .then(resp => dispatch({ type: SIGNUP_SUCCESS, payload: resp.body }))
+            .catch(err => dispatch({ type: SIGNUP_ERROR, err }));
 
-   }
+    }
 }
 
 
@@ -53,10 +55,25 @@ function setJokes(jokes) {
     }
 }
 
+function setPrivateJokes(jokes) {
+    return {
+        type: PRIVATE_JOKES_SUCCESS,
+        jokes
+    }
+}
+
 export function getJokes() {
     return dispatch => {
         sendJokesRequest()
             .then(resp => dispatch(setJokes(resp.data)))
+            .catch(err => console.log(err));
+    }
+}
+
+export function getPrivateJokes() {
+    return dispatch => {
+        sendPrivateJokesRequest()
+            .then(resp => dispatch(setPrivateJokes(resp.data)))
             .catch(err => console.log(err));
     }
 }
@@ -69,7 +86,9 @@ export function login(email, password) {
 
         sendLoginRequest(email, password)
             .then(success => {
-                localStorage.token=success.data.token; 
+                localStorage.token = success.data.token;
+                console.log(success)
+                localStorage.userId = success.data.id;
                 dispatch(setLoginPending(false));
                 dispatch(setLoginSuccess(true));
             })
@@ -101,12 +120,12 @@ export function register(email, password) {
 export default function reducer(state = {
     isLoginPending: false,
     isLoginSuccess: false,
-    LoginError: null
+    LoginError: null,
+    privateJokes: []
 }, action) {
 
     switch (action.type) {
         case LOGIN_SUCCESS:
-            console.log(action.payload)
             return {
                 ...state,
                 isLoginSuccess: action.isLoginSuccess
@@ -126,7 +145,7 @@ export default function reducer(state = {
         case SIGNUP_SUCCESS:
             return {
                 ...state,
-                
+
             };
         case SIGNUP_PENDING:
             return {
@@ -137,9 +156,15 @@ export default function reducer(state = {
                 ...state,
             };
 
+        case PRIVATE_JOKES_SUCCESS:
+            return {
+                ...state,
+                privateJokes: action.jokes
+            }
+
         default:
             return state;
-    }
+    };
 }
 
 function sendLoginRequest(email, password) {
@@ -156,6 +181,7 @@ function sendJokesRequest() {
     return axios.get(`${baseUrl}/jokes`);
 }
 
-
-
+function sendPrivateJokesRequest() {
+    return axios.get(`${baseUrl}/users/${localStorage.userId}/jokes`, { headers: { "Authorization": `${localStorage.token}` } });
+}
 
