@@ -1,21 +1,18 @@
-import React from "react";
-import './Home.css'
+import React from 'react'
+import SearchBar from '../SearchBar';
 
-const Home = () => {
+const NavBar = () => {
     return (
-        <div> 
-        <div className='navbar'> 
+        <div className='navbar'>
             <nav>
                 <a href='#'>Home</a>
                 <a href='#'>Login</a>
                 <a href='#'>Register</a>
                 <a href='#'>Post</a>
             </nav>
+            <SearchBar />
         </div>
-        
-        </div>
-        
     );
 };
 
-export default Home;
+export default NavBar;

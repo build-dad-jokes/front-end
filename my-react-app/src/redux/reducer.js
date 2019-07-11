@@ -4,6 +4,7 @@ import axios from 'axios';
 const LOGIN_PENDING = 'LOGIN_PENDING';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_ERROR = 'LOGIN_ERROR';
+const JOKES_SUCCESS = 'JOKES_SUCCESS';
 const baseUrl = 'https://bw-dad-jokes.herokuapp.com/api';
 
 function setLoginPending(isLoginPending) {
@@ -25,6 +26,21 @@ function setLoginError(loginError) {
         type: LOGIN_ERROR,
         loginError
     };
+}
+
+function setJokes(jokes) {
+    return {
+        type: JOKES_SUCCESS,
+        jokes
+    }
+}
+
+export function getJokes() {
+    return dispatch => {
+        sendJokesRequest()
+            .then(resp => dispatch(setJokes(resp.data)))
+            .catch(err => console.log(err));
+    }
 }
 
 export function login(email, password) {
@@ -94,11 +110,15 @@ export default function reducer(state = {
 }
 
 function sendLoginRequest(email, password) {
-    const payload = {username: email, password};
+    const payload = { username: email, password };
     return axios.post(`${baseUrl}/auth/login`, payload);
 }
 
 function sendRegisterationRequest(email, password) {
-    const payload = {username: email, password};
+    const payload = { username: email, password };
     return axios.post(`${baseUrl}/auth/register`, payload);
+}
+
+function sendJokesRequest() {
+    return axios.get(`${baseUrl}/jokes`);
 }
