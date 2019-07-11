@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { register } from '../../redux/reducer';
+import { signUp } from '../../redux/reducer';
+
 
 
 class SignUpForm extends React.Component {
@@ -11,7 +12,7 @@ class SignUpForm extends React.Component {
             email: '',
             password: '',
             passwordConfirmation: '',
-            
+
         }
 
         this.onChange = this.onChange.bind(this);
@@ -24,8 +25,8 @@ class SignUpForm extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const {username, password} = this.state;
-        this.props.register(username, password);
+        const { username, password } = this.state;
+        this.props.signUp({username, password});
     }
 
     render() {
@@ -95,10 +96,10 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        register: (email, password) => dispatch(register(email, password))
-    };
+const mapDispatchToProps = {
+
+    signUp
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
