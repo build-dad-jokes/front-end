@@ -5,7 +5,7 @@ const LOGIN_PENDING = 'LOGIN_PENDING';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_ERROR = 'LOGIN_ERROR';
 const JOKES_SUCCESS = 'JOKES_SUCCESS';
-const baseUrl = 'https://bw-dad-jokes.herokuapp.com/api';
+export const baseUrl = 'https://dad-jokes-bw.herokuapp.com/api';
 
 function setLoginPending(isLoginPending) {
     return {
@@ -122,3 +122,4 @@ function sendRegisterationRequest(email, password) {
 function sendJokesRequest() {
     return axios.get(`${baseUrl}/jokes`);
 }
+

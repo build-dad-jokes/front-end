@@ -1,33 +1,26 @@
 import React from "react";
+import axios from 'axios';
 import './styles.css'
-import SearchBar from '../SearchBar';
+import { baseUrl } from '../../redux/reducer';
 
-import { connect } from 'react-redux';
-import { getJokes } from '../../redux/reducer';
+import Jokes from '../Jokes';
 
 class Home extends React.Component {
+    state = {
+        jokes: []
+    }
+
     componentDidMount() {
-        this.props.getJokes();
+        axios.get(`${baseUrl}/jokes`)
+            .then(resp => this.setState({ jokes: resp.data }))
+            .catch(err => console.log(err));
     }
 
     render() {
-        console.log(this.props.jokes);
         return (
-            <div> HEY I FUNNY JOKEZ</div>
+            <Jokes jokes={this.state.jokes} />
         );
     }
 };
 
-const mapStateToProps = (state) => {
-    return {
-        jokes: state.jokes
-    };
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getJokes: () => dispatch(getJokes())
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
