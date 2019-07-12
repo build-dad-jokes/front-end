@@ -1,0 +1,13 @@
+.searchbar{
+    text-align: center;
+}
+
+input{
+text-align: center;
+}
+
+/* placeholder text */
+::-webkit-input-placeholder { 
+    padding: 10px;
+  }
+

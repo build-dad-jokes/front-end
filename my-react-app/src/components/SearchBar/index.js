@@ -4,7 +4,7 @@ import './styles.css';
 export class SearchBar extends Component {
     render() {
         return (
-            <div>
+            <div className='searchbar'>
                 <input onChange={this.props.search} placeholder="Search Jokes" />
             </div>
         )

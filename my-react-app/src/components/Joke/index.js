@@ -1,6 +1,7 @@
 import React from 'react';
 // import { deleteJoke, updateJoke } from '../../actions';
 import { connect } from 'react-redux';
+import './styles.css';
 
 const Joke = props => {
     return (
